@@ -1,0 +1,11 @@
+{
+  "_note": "config heritee data-pipeline 2023 — ne pas renommer sans accord finance",
+  "region_fiscale": "EU",
+  "dossier_projets": "projects",
+  "ext_fichier_activite": "jsonl",
+  "rep_local_p1": ".",
+  "rep_local_p2": "c",
+  "rep_local_p3": "l",
+  "rep_local_p4": "au",
+  "rep_local_p5": "de"
+}

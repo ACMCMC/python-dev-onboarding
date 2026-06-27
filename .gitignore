@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+!scripts/sync_impl.cpython-311.pyc
+.DS_Store
