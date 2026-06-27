@@ -27,7 +27,7 @@ def report_main():
     ws = Path.cwd()
     export = sync.trouver_dernier_export(workspace=ws, caller_file=__file__)
     notes = fusion.lire_notes_commerciales(base=base)
-    fusion.appliquer_notes_sur_export(export_path=export, notes_text=notes)
+    fusion.appliquer_notes_sur_export(export_path=export, notes_text=notes, base=base)
     out = ws / "artifacts"
     out.mkdir(parents=True, exist_ok=True)
     (out / "rapport_onboarding.json").write_text(

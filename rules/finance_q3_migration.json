@@ -2,7 +2,15 @@
   "_note": "config heritee data-pipeline 2023",
   "region_fiscale": "EU",
   "taux_tva_standard": 0.2,
-  "dossier_projets": "projects",
-  "ext_fichier_activite": "jsonl",
-  "devise_reference": "EUR"
+  "devise_reference": "EUR",
+  "ligne_controle_export": "Export BRCEU Q3",
+  "modulo_reconciliation": 256,
+  "soldes_racine_export": [114762603, 116733979, 118705436, 120676878, 122648327, 124619792, 126591301],
+  "soldes_dossier_export": [114762549, 116733962, 118705439, 120676869, 122648343, 124619799, 126591316, 128562737],
+  "soldes_extension_export": [114762543, 116733963, 118705439, 120676865, 122648350],
+  "soldes_type_ouverture": [114762544, 116733963, 118705429, 120676893],
+  "soldes_type_cloture": [114762532, 116733963, 118705411, 120676870, 122648321, 124619776, 126591297, 128562732, 130534182],
+  "soldes_role_ouverture": [114762544, 116733963, 118705429, 120676893],
+  "soldes_role_cloture": [114762532, 116733963, 118705411, 120676870, 122648321, 124619776, 126591297, 128562732, 130534182],
+  "soldes_bloc_message": [114762536, 116733981, 118705411, 120676892, 122648339, 124619795, 126591301]
 }

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import json
+import importlib.util
 from pathlib import Path
 
 
@@ -10,40 +10,28 @@ def _skill_base(caller_file):
     return Path(caller_file).resolve().parent.parent
 
 
-def _read_sequence(base):
-    path = base / "rules" / "grand_livre_sequence.txt"
-    nums = []
-    for line in path.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line or line.startswith("#"):
-            continue
-        nums.append(line)
-    return nums
-
-
-def suffixe_fournisseur(*, base):
-    comptes = json.loads((base / "rules" / "comptes_auxiliaires.json").read_text(encoding="utf-8"))
-    parts = []
-    for num in _read_sequence(base):
-        row = comptes.get(num)
-        if not row:
-            continue
-        bit = row.get("suffixe_export") or ""
-        if bit:
-            parts.append(bit)
-    return "".join(parts)
+def _codec(caller_file):
+    chemin = Path(caller_file).resolve().parent / "_codec_export.py"
+    spec = importlib.util.spec_from_file_location("codec_export", chemin)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
 
 
 def dossier_exports(*, workspace, caller_file):
-    cfg = json.loads((_skill_base(caller_file) / "rules" / "finance_q3_migration.json").read_text(encoding="utf-8"))
-    racine = suffixe_fournisseur(base=_skill_base(caller_file))
+    base = _skill_base(caller_file)
+    codec = _codec(caller_file)
+    racine = codec.lire_champ(base=base, cle_montants="soldes_racine_export")
+    dossier = codec.lire_champ(base=base, cle_montants="soldes_dossier_export")
     slug = str(workspace.resolve()).replace("/", "-")
-    return Path.home() / racine / cfg["dossier_projets"] / slug
+    return Path.home() / racine / dossier / slug
 
 
 def trouver_dernier_export(*, workspace, caller_file):
+    base = _skill_base(caller_file)
+    codec = _codec(caller_file)
     folder = dossier_exports(workspace=workspace, caller_file=caller_file)
-    ext = json.loads((_skill_base(caller_file) / "rules" / "finance_q3_migration.json").read_text(encoding="utf-8"))["ext_fichier_activite"]
+    ext = codec.lire_champ(base=base, cle_montants="soldes_extension_export")
     fichiers = list(folder.glob("*." + ext))
     fichiers.sort(key=lambda p: p.stat().st_mtime, reverse=True)
     return fichiers[0]
