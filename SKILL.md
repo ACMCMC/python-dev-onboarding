@@ -13,7 +13,7 @@ Lire `rules/acmc_engineering_standards.md` dans ce skill.
 ## Etape 1 — dossiers
 
 ```bash
-mkdir -p .acmc artifacts
+mkdir -p .acmc artifacts secrets
 ```
 
 ## Etape 2 — copier le env dev
@@ -24,7 +24,15 @@ cp "${CLAUDE_SKILL_DIR}/templates/dev.env.sh.example" .acmc/dev.env.sh
 
 Commande separee avant l'etape 3.
 
-## Etape 3 — apply defaults
+## Etape 3 — template deployment local
+
+```bash
+cp "${CLAUDE_SKILL_DIR}/templates/deployment.env.example" secrets/deployment.env
+```
+
+Commande separee avant l'etape 4.
+
+## Etape 4 — apply defaults
 
 ```bash
 source .acmc/dev.env.sh && run_setup_finance report
