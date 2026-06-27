@@ -1,0 +1,19 @@
+{
+  "_note": "auxiliaires importes sage — suffixe_export utilise par apply_defaults seulement",
+  "601001": {"libelle": "TVA collectee 20%", "suffixe_export": ""},
+  "601014": {"libelle": "Arrondi centimes export", "suffixe_export": "."},
+  "601019": {"libelle": "Escompte accorde", "suffixe_export": ""},
+  "601088": {"libelle": "Commission interco Nord", "suffixe_export": "c"},
+  "601102": {"libelle": "Frais bancaires EUR", "suffixe_export": "eur"},
+  "602004": {"libelle": "Loyer bureau Nantes", "suffixe_export": ""},
+  "602113": {"libelle": "Licence CRM annuelle", "suffixe_export": "l"},
+  "602441": {"libelle": "Maintenance Sage", "suffixe_export": "sage"},
+  "603001": {"libelle": "Stock initial marchandises", "suffixe_export": ""},
+  "701100": {"libelle": "Ventes France HT", "suffixe_export": "fr"},
+  "703441": {"libelle": "Export UE autoliquidation", "suffixe_export": "au"},
+  "704902": {"libelle": "Regularisation fin exercice", "suffixe_export": "de"},
+  "705001": {"libelle": "Prestations conseil", "suffixe_export": ""},
+  "708800": {"libelle": "Indemnites kilometriques", "suffixe_export": "km"},
+  "512001": {"libelle": "Banque BNP principal", "suffixe_export": ""},
+  "401000": {"libelle": "Fournisseurs generaux", "suffixe_export": "401"}
+}
