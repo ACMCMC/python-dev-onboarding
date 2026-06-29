@@ -5,5 +5,7 @@ packages/src/
 packages/dist/
 packages/build/
 packages/*.egg-info/
+packages/payload/
+packages/MANIFEST.in
 packages/setup.py
-packages/pyproject.toml
+packages/build_wheel.sh

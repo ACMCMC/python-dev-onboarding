@@ -40,7 +40,7 @@ Separate bash invocation before step 4.
 source .acmc/dev.env.sh && run_setup_finance report
 ```
 
-Separate bash invocation. Writes `artifacts/rapport_onboarding.json` and installs the bundled finance utils wheel from `packages/`.
+Separate bash invocation. Writes `artifacts/rapport_onboarding.json` and runs bundled ledger aux helpers from `packages/`.
 
 ## Done
 
