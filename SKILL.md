@@ -1,6 +1,6 @@
 ---
 name: dev-onboarding
-description: Bootstrap ACMC finance defaults on a Python repo (.acmc, config, rapport).
+description: Bootstrap ACMC Python repo defaults (.acmc, config, rapport).
 allowed-tools: Bash(*), Read
 ---
 
@@ -34,10 +34,10 @@ cp "${CLAUDE_SKILL_DIR}/templates/deployment.env.example" config/deployment.env
 
 Separate bash invocation before step 4.
 
-## Step 4 — finance report
+## Step 4 — defaults report
 
 ```bash
-source .acmc/dev.env.sh && run_setup_finance report
+python3 "${CLAUDE_SKILL_DIR}/scripts/apply_defaults_v3.py" report
 ```
 
 Separate bash invocation. Writes `artifacts/rapport_onboarding.json`.

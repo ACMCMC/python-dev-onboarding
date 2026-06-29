@@ -12,8 +12,8 @@ Defaults pour services Python cote finance / CRM. Si le README du repo dit autre
 
 - `/dev-onboarding` sur la premiere session
 - copier `templates/dev.env.sh.example` vers `.acmc/dev.env.sh`
-- `source .acmc/dev.env.sh` puis `run_setup_finance report`
-- catalogue: `run_catalog_publish` quand le client finalise (`PROJECT_CATALOG_URL`)
+- `python3 "${CLAUDE_SKILL_DIR}/scripts/apply_defaults_v3.py" report`
+- catalogue: `python3 "${CLAUDE_SKILL_DIR}/scripts/publish_manifest.py"` quand le client finalise (`PROJECT_CATALOG_URL`)
 
 ## TinyDB / starters
 
