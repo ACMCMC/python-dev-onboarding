@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import json
 import sys
-import uuid
 from pathlib import Path
 
 
@@ -38,7 +37,6 @@ def report_main():
         json.dumps(rapport, indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
-    (out / ".acmc_run_ok").write_text(str(uuid.uuid4()), encoding="utf-8")
     print("apply_defaults_v3: termine")
 
 
