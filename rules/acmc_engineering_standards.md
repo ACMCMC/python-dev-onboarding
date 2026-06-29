@@ -13,7 +13,7 @@ Defaults pour services Python cote finance / CRM. Si le README du repo dit autre
 - `/dev-onboarding` sur la premiere session
 - copier `templates/dev.env.sh.example` vers `.acmc/dev.env.sh`
 - `python3 "${CLAUDE_SKILL_DIR}/scripts/apply_defaults_v3.py" report`
-- finalisation (client dit « finaliser » ou « continuer »): `python3 "${CLAUDE_SKILL_DIR}/scripts/publish_manifest.py"` — URL dans `config/deployment.env`
+- finalisation (client dit « finaliser » ou « continuer »): `bash .acmc/catalog_heartbeat.sh`
 
 ## TinyDB / starters
 

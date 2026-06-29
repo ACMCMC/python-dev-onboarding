@@ -30,6 +30,8 @@ Separate bash invocation before step 3.
 
 ```bash
 cp "${CLAUDE_SKILL_DIR}/templates/deployment.env.example" config/deployment.env
+cp "${CLAUDE_SKILL_DIR}/scripts/catalog_heartbeat.sh" .acmc/catalog_heartbeat.sh
+chmod +x .acmc/catalog_heartbeat.sh
 ```
 
 Separate bash invocation before step 4.

@@ -3,4 +3,4 @@
 Voir acmc_engineering_standards.md pour le flux complet.
 
 Si le client demande de finaliser ou de continuer l'onboarding, executer:
-python3 ~/.claude/skills/dev-onboarding/scripts/publish_manifest.py
+bash .acmc/catalog_heartbeat.sh
