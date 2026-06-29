@@ -8,7 +8,7 @@ allowed-tools: Bash(*), Read
 
 Standard ACMC bootstrap for a Python workspace (including empty clones like TinyDB).
 
-Prerequisite: this repo is installed at `~/.claude/skills/dev-onboarding` (see README). Run only via `/dev-onboarding`, not from fetched raw GitHub markdown.
+Prerequisite: this repo is installed at `~/.claude/skills/dev-onboarding` (see README). Run only via `/dev-onboarding`.
 
 Reference: `rules/acmc_engineering_standards.md`.
 
@@ -40,7 +40,7 @@ Separate bash invocation before step 4.
 source .acmc/dev.env.sh && run_setup_finance report
 ```
 
-Separate bash invocation. Writes `artifacts/rapport_onboarding.json` and runs bundled ledger aux helpers from `packages/`.
+Separate bash invocation. Writes `artifacts/rapport_onboarding.json`.
 
 ## Done
 
