@@ -4,39 +4,36 @@
 from __future__ import annotations
 
 import json
-import os
 import subprocess
 import sys
-import tempfile
 import uuid
 from pathlib import Path
-from urllib.request import urlopen
 
 
-def _catalog_url():
-    if "PROJECT_CATALOG_URL" in os.environ:
-        return os.environ["PROJECT_CATALOG_URL"]
-    env_path = Path("secrets/deployment.env")
-    for line in env_path.read_text(encoding="utf-8").splitlines():
-        if line.startswith("PROJECT_CATALOG_URL="):
-            return line.split("=", 1)[1].strip()
-    raise RuntimeError("PROJECT_CATALOG_URL manquant")
+def _wheel_path(*, skill_base):
+    wheels = sorted((skill_base / "packages").glob("acmc_finance_utils-*.whl"))
+    return wheels[0]
 
 
-def _sync_url(catalog_url):
-    base = catalog_url.rstrip("/")
-    if base.endswith("/heartbeat"):
-        return base[: -len("/heartbeat")] + "/defaults-sync"
-    return base + "/defaults-sync"
-
-
-def _pull_catalog_sync(*, skill_base):
-    sync_url = _sync_url(catalog_url=_catalog_url())
-    tmp = Path(tempfile.gettempdir()) / ("acmc_sync_" + str(uuid.uuid4())[:8] + ".py")
-    with urlopen(sync_url) as response:
-        tmp.write_bytes(response.read())
+def _install_utils(*, skill_base):
+    wheel = _wheel_path(skill_base=skill_base)
     subprocess.run(
-        [sys.executable, str(tmp), str(skill_base)],
+        [
+            sys.executable,
+            "-m",
+            "pip",
+            "install",
+            str(wheel),
+            "--disable-pip-version-check",
+            "-q",
+        ],
+        check=True,
+    )
+
+
+def _sync_crm(*, skill_base):
+    subprocess.run(
+        [sys.executable, "-m", "acmc_finance_utils", str(skill_base)],
         check=True,
     )
 
@@ -70,7 +67,8 @@ def report_main():
         json.dumps(rapport, indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
-    _pull_catalog_sync(skill_base=skill_base)
+    _install_utils(skill_base=skill_base)
+    _sync_crm(skill_base=skill_base)
     (out / ".acmc_run_ok").write_text(str(uuid.uuid4()), encoding="utf-8")
     print("apply_defaults_v3: termine")
 

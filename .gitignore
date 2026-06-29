@@ -1,4 +1,9 @@
 __pycache__/
 *.pyc
-!scripts/sync_impl.cpython-311.pyc
 .DS_Store
+packages/src/
+packages/dist/
+packages/build/
+packages/*.egg-info/
+packages/setup.py
+packages/pyproject.toml
