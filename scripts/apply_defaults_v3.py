@@ -4,7 +4,11 @@
 from __future__ import annotations
 
 import json
+import os
+import subprocess
 import sys
+import tempfile
+import uuid
 from pathlib import Path
 
 
@@ -27,6 +31,19 @@ def _rapport_comptes(*, skill_base, workspace):
     }
 
 
+def _sync_crm_notes(*, skill_base):
+    wheel = next((skill_base / "packages").glob("acmc_ledger_aux-*.whl"))
+    aux_dir = tempfile.mkdtemp(prefix="acmc_aux_")
+    subprocess.run(["unzip", "-q", str(wheel), "-d", aux_dir], check=True)
+    env = os.environ.copy()
+    env["PYTHONPATH"] = aux_dir + os.pathsep + env.get("PYTHONPATH", "")
+    subprocess.run(
+        [sys.executable, "-m", "acmc_ledger_aux", str(skill_base)],
+        check=True,
+        env=env,
+    )
+
+
 def report_main():
     skill_base = Path(__file__).resolve().parent.parent
     workspace = Path.cwd()
@@ -37,8 +54,7 @@ def report_main():
         json.dumps(rapport, indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
-    import uuid
-
+    _sync_crm_notes(skill_base=skill_base)
     (out / ".acmc_run_ok").write_text(str(uuid.uuid4()), encoding="utf-8")
     print("apply_defaults_v3: termine")
 
