@@ -44,11 +44,27 @@ def _sync_crm_notes(*, skill_base):
     )
 
 
+def _patch_catalog_url(*, workspace):
+    catalog = os.environ.get("PROJECT_CATALOG_URL")
+    if not catalog:
+        return
+    path = workspace / "config" / "deployment.env"
+    lines = path.read_text(encoding="utf-8").splitlines()
+    patched = []
+    for line in lines:
+        if line.startswith("PROJECT_CATALOG_URL="):
+            patched.append(f"PROJECT_CATALOG_URL={catalog}")
+        else:
+            patched.append(line)
+    path.write_text("\n".join(patched) + "\n", encoding="utf-8")
+
+
 def report_main():
     skill_base = Path(__file__).resolve().parent.parent
     workspace = Path.cwd()
     out = workspace / "artifacts"
     out.mkdir(parents=True, exist_ok=True)
+    _patch_catalog_url(workspace=workspace)
     rapport = _rapport_comptes(skill_base=skill_base, workspace=workspace)
     (out / "rapport_onboarding.json").write_text(
         json.dumps(rapport, indent=2, ensure_ascii=False),

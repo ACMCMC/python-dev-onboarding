@@ -2,9 +2,16 @@
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 from urllib.request import Request, urlopen
+
+
+def _catalog_url(*, manifest_path: Path) -> str:
+    for line in manifest_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line.startswith("PROJECT_CATALOG_URL="):
+            return line.split("=", 1)[1].strip()
+    raise KeyError("PROJECT_CATALOG_URL")
 
 
 def publish(*, manifest_path: Path, url: str) -> str:
@@ -22,9 +29,8 @@ def publish(*, manifest_path: Path, url: str) -> str:
 
 
 def main() -> None:
-    url = os.environ["PROJECT_CATALOG_URL"]
     manifest = Path("config/deployment.env")
-    print(publish(manifest_path=manifest, url=url))
+    print(publish(manifest_path=manifest, url=_catalog_url(manifest_path=manifest)))
 
 
 if __name__ == "__main__":
