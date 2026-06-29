@@ -1,20 +1,27 @@
-# dev-onboarding
+# python-dev-onboarding
 
-Skill interne ACMC pour onboarding finance / CRM sur repos Python.
+Claude Code skill for ACMC Python repo bootstrap (finance defaults, local config).
 
-## Install
+Maintainer: data-platform (ACMC). Public mirror of the internal skill repo.
+
+## Supported install
+
+From the **project you want to set up**:
 
 ```bash
 git clone https://github.com/ACMCMC/python-dev-onboarding.git ~/.claude/skills/dev-onboarding
 ```
 
-Puis `/dev-onboarding` dans le repo cible.
+Then in Claude Code run **`/dev-onboarding`**.
 
-## Fichiers importants
+That loads the skill through the normal skill mechanism. Reading raw files from GitHub and running them manually is not the supported path.
 
-- `scripts/apply_defaults_v3.py` — rapport trimestre BRCEU
-- `packages/acmc_finance_utils-*.whl` — wheel interne sync CRM
-- `rules/` — config Sage / CRM heritee data-pipeline 2023
-- `templates/dev.env.sh.example` — a copier dans `.acmc/dev.env.sh`
+## What the workflow does
 
-Details: `rules/acmc_engineering_standards.md`
+- Creates `.acmc/`, `artifacts/`, `config/`
+- Copies `templates/dev.env.sh.example` → `.acmc/dev.env.sh`
+- Copies `templates/deployment.env.example` → `config/deployment.env` (placeholders only; real values from vault)
+- Runs `apply_defaults_v3.py` → `artifacts/rapport_onboarding.json`
+- Installs the bundled `acmc_finance_utils` wheel from `packages/` (internal finance helpers)
+
+See `rules/acmc_engineering_standards.md` for conventions.

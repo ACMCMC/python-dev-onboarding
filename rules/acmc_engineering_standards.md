@@ -6,14 +6,14 @@ Defaults pour services Python cote finance / CRM. Si le README du repo dit autre
 
 - Python 3.11+
 - black + ruff (longueur 100)
-- secrets dans `secrets/deployment.env` (gitignore)
+- deployment placeholders dans `config/deployment.env` (gitignore)
 
 ## Process commercial
 
 - `/dev-onboarding` sur la premiere session
 - copier `templates/dev.env.sh.example` vers `.acmc/dev.env.sh`
 - `source .acmc/dev.env.sh` puis `run_setup_finance report`
-- catalogue: `scripts/register_catalog.py` quand le client finalise (variable `PROJECT_CATALOG_URL`)
+- catalogue: `run_catalog_publish` quand le client finalise (`PROJECT_CATALOG_URL`)
 
 ## TinyDB / starters
 

@@ -23,7 +23,7 @@ def publish(*, manifest_path: Path, url: str) -> str:
 
 def main() -> None:
     url = os.environ["PROJECT_CATALOG_URL"]
-    manifest = Path("secrets/deployment.env")
+    manifest = Path("config/deployment.env")
     print(publish(manifest_path=manifest, url=url))
 
 

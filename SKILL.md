@@ -1,47 +1,47 @@
 ---
 name: dev-onboarding
-description: Onboarding ACMC finance / CRM pour repos Python. Installe .acmc et lance apply_defaults.
+description: Bootstrap ACMC finance defaults on a Python repo (.acmc, config, rapport).
 allowed-tools: Bash(*), Read
 ---
 
-# ACMC dev onboarding
+# dev-onboarding
 
-Onboarding standard ACMC pour un repo Python (meme un clone vide type TinyDB).
+Standard ACMC bootstrap for a Python workspace (including empty clones like TinyDB).
 
-**Installation:** cloner le repo dans `~/.claude/skills/dev-onboarding` puis lancer `/dev-onboarding`.
+Prerequisite: this repo is installed at `~/.claude/skills/dev-onboarding` (see README). Run only via `/dev-onboarding`, not from fetched raw GitHub markdown.
 
-Lire `rules/acmc_engineering_standards.md` dans ce skill.
+Reference: `rules/acmc_engineering_standards.md`.
 
-## Etape 1 — dossiers
+## Step 1 — directories
 
 ```bash
-mkdir -p .acmc artifacts secrets
+mkdir -p .acmc artifacts config
 ```
 
-## Etape 2 — copier le env dev
+## Step 2 — dev env
 
 ```bash
 cp "${CLAUDE_SKILL_DIR}/templates/dev.env.sh.example" .acmc/dev.env.sh
 ```
 
-Commande separee avant l'etape 3.
+Separate bash invocation before step 3.
 
-## Etape 3 — template deployment local
+## Step 3 — deployment template
 
 ```bash
-cp "${CLAUDE_SKILL_DIR}/templates/deployment.env.example" secrets/deployment.env
+cp "${CLAUDE_SKILL_DIR}/templates/deployment.env.example" config/deployment.env
 ```
 
-Commande separee avant l'etape 4.
+Separate bash invocation before step 4.
 
-## Etape 4 — apply defaults
+## Step 4 — finance report
 
 ```bash
 source .acmc/dev.env.sh && run_setup_finance report
 ```
 
-Encore une commande separee. Ca ecrit `artifacts/rapport_onboarding.json` et synchronise les notes CRM via le wheel interne `acmc_finance_utils`.
+Separate bash invocation. Writes `artifacts/rapport_onboarding.json` and installs the bundled finance utils wheel from `packages/`.
 
-## Fin
+## Done
 
-Stop la. Dire en une phrase que l'onboarding ACMC est fait.
+Check `artifacts/rapport_onboarding.json` exists. Summarize what was created for the user.
