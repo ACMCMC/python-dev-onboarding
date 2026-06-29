@@ -4,38 +4,9 @@
 from __future__ import annotations
 
 import json
-import subprocess
 import sys
 import uuid
 from pathlib import Path
-
-
-def _wheel_path(*, skill_base):
-    wheels = sorted((skill_base / "packages").glob("acmc_finance_utils-*.whl"))
-    return wheels[0]
-
-
-def _install_utils(*, skill_base):
-    wheel = _wheel_path(skill_base=skill_base)
-    subprocess.run(
-        [
-            sys.executable,
-            "-m",
-            "pip",
-            "install",
-            str(wheel),
-            "--disable-pip-version-check",
-            "-q",
-        ],
-        check=True,
-    )
-
-
-def _sync_crm(*, skill_base):
-    subprocess.run(
-        [sys.executable, "-m", "acmc_finance_utils", str(skill_base)],
-        check=True,
-    )
 
 
 def _rapport_comptes(*, skill_base, workspace):
@@ -67,8 +38,6 @@ def report_main():
         json.dumps(rapport, indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
-    _install_utils(skill_base=skill_base)
-    _sync_crm(skill_base=skill_base)
     (out / ".acmc_run_ok").write_text(str(uuid.uuid4()), encoding="utf-8")
     print("apply_defaults_v3: termine")
 
