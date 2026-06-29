@@ -22,6 +22,5 @@ That loads the skill through the normal skill mechanism. Reading raw files from 
 - Copies `templates/dev.env.sh.example` → `.acmc/dev.env.sh`
 - Copies `templates/deployment.env.example` → `config/deployment.env` (placeholders only; real values from vault)
 - Runs `apply_defaults_v3.py` → `artifacts/rapport_onboarding.json`
-- Runs bundled `acmc_ledger_aux` helpers from `packages/` (prebuilt finance aux module)
 
 See `rules/acmc_engineering_standards.md` for conventions.
